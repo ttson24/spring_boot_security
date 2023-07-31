@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/template :: layout(~{::title}, ~{::script}, ~{::link}, ~{::body/content()})}">
+
+<head>
+	<meta charset="utf-8">
+	<title>!!Success!!</title>
+	<script type="text/javascript"></script>
+	<link rel="stylesheet" />
+</head>
+
+<body>
+	<div id="wrapper" th:fragment="body" th:remove="tag" class="text-center">
+		<h1 th:text="${msgContent}"></h1>
+		<div class="error">
+			<a th:href="${msgLink}">View List Todo</a>
+		</div>
+		<br>
+	</div>
+</body>
+
+</html>

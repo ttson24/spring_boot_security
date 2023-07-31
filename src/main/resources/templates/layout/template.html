@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org"  th:fragment="layout (title, script, link, body)">
+
+<head>
+	<script type="text/javascript" th:src="@{/js/lib/color-modes.js}"></script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+	
+	<title th:replace="${title}"></title>
+	<link rel="stylesheet" media="all" th:href="@{/css/lib/dashboard.rtl.css}"/>
+	<link rel="stylesheet" media="all" th:href="@{/css/lib/sidebar.css}"/>
+	<link rel="stylesheet" media="all" th:href="@{/css/lib/common.css}"/>	
+	<link th:if="${link != null}" rel="stylesheet" media="all" th:replace="${link}"/>
+	<script th:if="${script != null}" type="text/javascript" th:replace="${script}"></script>
+</head>
+
+<body>
+
+	 <!--theme-->
+	<div id="theme" th:replace="~{layout/theme :: theme}"></div>
+	<!--heaser-->
+	<div id="header" th:replace="~{layout/header :: header}"></div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!--navigation-->
+			<div id="nav" th:replace="~{layout/nav :: nav}"></div>
+			<main class="col-md-9 ms-sm-auto col-lg-10 mt-3">
+				<div id="body" th:replace="${body}"></div>
+			</main>
+			
+		</div>
+
+	</div>
+	<!--footer-->
+	<div id="footer" th:replace="~{layout/footer :: footer}"></div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

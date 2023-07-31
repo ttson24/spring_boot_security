@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{layout/template :: }">
+<head>
+<meta charset="utf-8">
+<title>Business Error!</title>
+</head>
+<body>
+    <div id="wrapper" class="text-center" th:fragment="body" th:remove="tag">
+        <h1>Business Error!</h1>
+        <div class="error">
+            <span th:text="${#strings.isEmpty(exceptionCode)} ? #{e.xx.fw.8001} : |[${exceptionCode}] #{${exceptionCode}}|"></span>
+            <!-- (1) -->
+            <span th:replace="~{common/common-part :: messagesPanel}"></span>
+        </div>
+        <br>
+        <!-- omitted -->
+    </div>
+</body>
+</html>
