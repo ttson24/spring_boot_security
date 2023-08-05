@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/template::layout(~{::title}, ~{::script}, ~{::link}, ~{::body/content()})}">
 
+<head>
+	<meta charset="UTF-8">
+	<title>Edit employee information</title>
+	<link rel="stylesheet" />
+	<script type="text/javascript"></script>
+</head>
+
+<body>
+	<div class="container" id="emp" th:fragment="body" th:remove="tag">
+		<div class="row mb-3">
+			<h2 class="text-center">Edit employee information</h2>
+		</div>
+		<form th:action="@{/employees/emp-edit/{id}(id=${id})}" th:object="${employee}" th:method="post">
+			<div class="row mb-3">
+				<label for="firstName" class="col-sm-2">First Name</label>
+				<div class="col-sm-10">
+					<input type="hidden" th:field="*{id}" />
+					<input type="text" class="form-control" placeholder="Enter first name" th:field="*{firstName}" />
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="lastName" class="col-sm-2">Last Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Enter last name" th:field="*{lastName}" />
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="email" class="col-sm-2">Email</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Email" th:field="*{email}" />
+				</div>
+			</div>
+			<div class="row mb-2 mt-4 mix-auto justify-content-center">
+				<a th:href="@{/employees/}" class="col-sm-2 btn btn-secondary me-2">Cancel</a>
+				<button class="col-sm-2 btn btn-primary" type="submit">Update</button>
+			</div>
+		</form>
+	</div>
 </body>
+
 </html>

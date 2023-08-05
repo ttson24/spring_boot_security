@@ -11,10 +11,9 @@ public interface EmployeeRepository extends JpaRepository<Employees, Integer>{
 
    @Query(value="SELECT id, first_name, last_name, email, created_at, updated_at, deleted_at "
    		+ "	FROM Employees "
-   		+ "	WHERE first_name=? OR last_name=?",
+   		+ "	WHERE first_name like %?% OR last_name like %?% "
+   		+ "	ORDER BY id DESC",
 	   nativeQuery = true)
-   public List<Employees> findByName(String name);
+   public List<Employees> findByName(String firstName, String lastName);
 
-   
-   public Employees update(Employees emp, int id);
 }

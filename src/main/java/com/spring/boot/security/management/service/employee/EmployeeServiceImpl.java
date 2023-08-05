@@ -2,12 +2,10 @@ package com.spring.boot.security.management.service.employee;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import com.spring.boot.security.management.dao.EmployeeRepository;
 import com.spring.boot.security.management.dto.employee.EmployeeDto;
 import com.spring.boot.security.management.entity.employee.Employees;
@@ -22,7 +20,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeDto> findAll() {
 	List<EmployeeDto> lstDto = new ArrayList<EmployeeDto>();
 	List<Employees> lstEmp = new ArrayList<Employees>();
-	lstEmp = empRepo.findAll();
+	lstEmp = empRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
+	
 	if(!lstEmp.isEmpty() && lstEmp.size()>0) {
 	    lstEmp.forEach(emp->{
 		EmployeeDto dto = new EmployeeDto();
@@ -36,17 +35,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto findById(int id) {
 	EmployeeDto dto = new EmployeeDto();
-	Optional<Employees> emp = empRepo.findById(id);
-	if(!emp.isEmpty()) {
-	    BeanUtils.copyProperties(emp, dto);
-	}
+	Employees emp = empRepo.findById(id).orElse(new Employees());
+	BeanUtils.copyProperties(emp, dto);
 	return dto;
     }
 
     @Override
     public List<EmployeeDto> findByName(String name) {
 	List<EmployeeDto> lstDto = new ArrayList<EmployeeDto>();
-	List<Employees> lstEmp = empRepo.findByName(name);
+	List<Employees> lstEmp = empRepo.findByName(name, name);
 	if(!lstEmp.isEmpty() && lstEmp.size()>0) {
 	   lstEmp.forEach(emp->{
 	       EmployeeDto dto = new EmployeeDto();
@@ -78,9 +75,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto update(EmployeeDto dto, int id) {
+    public void update(EmployeeDto dto) {
+	Employees emp = new Employees();
+	BeanUtils.copyProperties(dto, emp);
+	empRepo.save(emp);
 	
-	return null;
     }
-
 }

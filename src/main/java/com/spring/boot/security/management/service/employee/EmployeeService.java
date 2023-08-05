@@ -14,7 +14,7 @@ public interface EmployeeService {
     
     public void save(EmployeeDto dto);
     
-    public EmployeeDto update(EmployeeDto dto, int id);
+    public void update(EmployeeDto dto);
     
     public void deleteById(int id);
     

@@ -10,6 +10,6 @@ public class MyConstantScreen {
     // Employee screen
     public static String EMPLOYEE_LIST		= "pages/employee/index";
     public static String EMPLOYEE_ADD		= "pages/employee/add";
-    public static String EMPLOYEE_EDIT		= "pages/employess/edit";
+    public static String EMPLOYEE_EDIT		= "pages/employee/edit";
     
 }

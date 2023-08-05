@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/template::layout(~{::title}, ~{::script}, ~{::link}, ~{::body/content()})}">
 
+<head>
+	<meta charset="UTF-8">
+	<title>Employees List</title>
+	<link rel="stylesheet" />
+	<script type="text/javascript"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row mb-3">
+			<h2 class="text-center">Employees List</h2>
+			<div class="row mt-2 mb-2 justify-content-end">
+				<label for="add" class="col-sm-9"></label>
+				<div class="col-sm-3">
+					<a th:href="@{/employees/emp-add}" class="btn btn-success col-sm-12">Create</a>
+				</div>
+			</div>
+			<div class="row mt-2 mb-2">
+				<form th:action="@{/employees/emp-find}" method="get" class="d-flex pe-0 me-0">
+					<input type="text" class="col-sm-9 me-3" placeholder="Enter search text" name="name" />
+					<div class="col-sm-3 pl-2">
+						<button class="btn btn-success col-sm-11" type="submit">Search</button>
+					</div>
+				</form>
+			</div>
+			<div class="table-reponsive">
+				<table class="table table-hover">
+					<thead class="table-success">
+						<tr>
+							<th>No</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th class="col-sm-2">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item, index : ${employees}">
+							<th scope="row"><span th:text="${index.index +1}"></span></th>
+							<td><span th:text="*{item.firstName}+' ' + *{item.lastName}"></span></td>
+							<td><span th:text="*{item.email}"></span></td>
+							<td>
+								<a class="btn btn-warning" th:href="@{/employees/emp-edit/{id}(id=${item.id})}">Edit</a>
+								<a class="btn btn-danger" th:href="@{/employees/emp-del/{id}(id=${item.id})}">Delete</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>
