@@ -8,7 +8,7 @@ public interface EmployeeService {
 
     public List<EmployeeDto> findAll();
     
-    public EmployeeDto findById(int id);
+    public EmployeeDto findById(Integer id);
     
     public List<EmployeeDto> findByName(String name);
     
@@ -16,7 +16,7 @@ public interface EmployeeService {
     
     public void update(EmployeeDto dto);
     
-    public void deleteById(int id);
+    public void deleteById(Integer id);
     
     public void deleteByListId(List<Integer> lstId);
 }

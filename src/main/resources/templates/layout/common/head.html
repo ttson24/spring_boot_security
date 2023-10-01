@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="head" th:remove="tag">
+    <script type="text/javascript" th:src="@{/js/lib/color-modes.js}"></script>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/tieuytien.jpeg}"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <th:block layout:fragment="title"></th:block>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" media="all" th:href="@{/css/lib/dashboard.rtl.css}"/>
+    <link rel="stylesheet" media="all" th:href="@{/css/lib/sidebar.css}"/>
+    <link rel="stylesheet" media="all" th:href="@{/css/lib/common.css}"/>
+    <th:block layout:fragment="links"></th:block>
+</head>
+
+<body>
+</body>
+</html>

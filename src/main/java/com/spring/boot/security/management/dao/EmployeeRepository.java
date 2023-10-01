@@ -2,10 +2,10 @@ package com.spring.boot.security.management.dao;
 
 import java.util.List;
 
+import com.spring.boot.security.management.entity.Employees;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.spring.boot.security.management.entity.employee.Employees;
 
 public interface EmployeeRepository extends JpaRepository<Employees, Integer>{
 

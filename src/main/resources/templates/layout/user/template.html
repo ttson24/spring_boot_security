@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/htymeleaf/layout"
+	  data-bs-theme="auto">
+
+<head th:replace="~{layout/common/head::head}">
+	<title>User Template</title>
+</head>>
+<body>
+<!--theme-->
+<div id="theme" th:replace="~{layout/user/theme :: theme}"></div>
+<!--header-->
+<div id="header" th:replace="~{layout/user/header :: header}"></div>
+<div class="container-fluid">
+	<div class="row">
+		<!--navigation-->
+		<div id="nav" th:replace="~{layout/user/nav :: nav}"></div>
+		<main class="col-md-9 ms-sm-auto col-lg-10 mt-3">
+			<div id="body" layout:fragment="content"></div>
+		</main>
+	</div>
+</div>
+<!--footer-->
+<div id="footer" th:replace="~{layout/user/footer :: footer}"></div>
+<div id="change-theme" th:replace="~{layout/common/foot::foot}"></div>
+<th:block layout:fragment="scripts"></th:block>
+</body>
+</html>

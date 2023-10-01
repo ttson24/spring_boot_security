@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+               xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+               layout:decorate="layout/admin/template">
+<head>
+    <meta charset="UTF-8">
+    <th:block layout:fragment="title">
+        <title>Index of instructor page</title>
+    </th:block>
+</head>
+<body>
+    <div class="container" layout:fragment="content">
+        <h2 class="text-center">Instructor list page</h2>
+
+        <div class="row mb-3">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered caption-top">
+                    <caption>
+                        <div class="row hstack">
+                            <div class="col-md-8 text-start">
+                                <input type="text" class="form-control" placeholder="Search...">
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <a href="#" th:href="@{/ins/add}" class="btn btn-success col-sm-6">New</a>
+                            </div>
+                        </div>
+                    </caption>
+                    <thead class="table-success">
+                        <tr class="text-center">
+                            <th scope="col-1">No</th>
+                            <th scope="col-3">Name</th>
+                            <th scope="col-3">Email</th>
+                            <th scope="col-2">Channel</th>
+                            <th scope="col-2">Hobby</th>
+                            <th scope="col-1">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${ins.size()>0}">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr th:if="${ins.size()>0}">
+                            <td colspan="6">
+                                <nav aria-label="Page navigation fixed-bottom">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item disabled">
+                                            <a class="page-link">Previous</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <h2 class="text-center">Data not found</h2>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

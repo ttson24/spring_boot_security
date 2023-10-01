@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/user/template}">
+<head>
+    <meta charset="UTF-8">
+    <th:block layout:fragment="title">
+        <title>This is user page</title>
+    </th:block>
+    <th:block layout:fragment="links">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    </th:block>
+<body>
+<div class="container" layout:fragment="content">
+    <h2>This Is User Page</h2>
+    <a th:href="@{/}">Back Home</a>
+</div>
+<th:block layout:fragment="scripts">
+    <script th:src="@{/js/index.js}"></script>
+</th:block>
+</body>
+</html>

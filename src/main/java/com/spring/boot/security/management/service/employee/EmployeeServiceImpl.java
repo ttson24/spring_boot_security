@@ -2,13 +2,14 @@ package com.spring.boot.security.management.service.employee;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.spring.boot.security.management.entity.Employees;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.spring.boot.security.management.dao.EmployeeRepository;
 import com.spring.boot.security.management.dto.employee.EmployeeDto;
-import com.spring.boot.security.management.entity.employee.Employees;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -33,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto findById(int id) {
+    public EmployeeDto findById(Integer id) {
 	EmployeeDto dto = new EmployeeDto();
 	Employees emp = empRepo.findById(id).orElse(new Employees());
 	BeanUtils.copyProperties(emp, dto);
@@ -63,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Integer id) {
 	empRepo.deleteById(id);
 	
     }
