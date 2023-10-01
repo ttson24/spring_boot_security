@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.themyleaf.org" xmlns:sec="http://www.themyleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>This is home page</title>
+</head>
+<style>
+	.header{
+		text-align: center;
+	}
+</style>
+<body>
+	<div class="d-flex justify-content-center mx-auto">
+		<h2 class="header">Welcome to home page</h2>
+		<p>
+			User: <span sec:authentication="principal.username"></span>
+		<hr>
+			Role: <span sec:authentication="principal.authorities"></span>
+		<hr>
+			<a th:href="@{/leader}" sec:authorize="hasRole('MANAGER')"> Go To Leader Page</a>
+		<br>
+			<a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')"> Go To Admin Page</a>
+		</p>
+		<form th:action="@{/logout}" method="POST">
+			<button class="btn btn-primary" type="submit"> Logout</button>
+		</form>
+	</div>
+</body>
+</html>
