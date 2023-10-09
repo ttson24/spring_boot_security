@@ -12,7 +12,7 @@ public class InstructorDto {
     private String firstName;
     private String lastName;
     private String email;
-    private InstructorDetailDto instructorDetailId;
+    private InstructorDetailDto instructorDetail;
 
     public InstructorDto(){}
 }

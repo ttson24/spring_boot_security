@@ -3,6 +3,8 @@ package com.spring.boot.security.management.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "instructor")
 @Data
@@ -24,14 +26,22 @@ public class Instructor {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_detail_id")
-    private InstructorDetail instructorDetailId;
+    private InstructorDetail instructorDetail;
 
-    public Instructor(){}
+    @OneToMany(mappedBy = "instructor",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    private List<Course> courses;
 
-    public Instructor(String firstName, String lastName, String email) {
+    public Instructor() {
+    }
+
+    public Instructor(Long id, String firstName, String lastName, String email, InstructorDetail detail) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.instructorDetail = detail;
     }
 
     @Override
@@ -41,7 +51,7 @@ public class Instructor {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", instructorDetailId=" + instructorDetailId +
+                ", instructorDetail=" + instructorDetail +
                 '}';
     }
 }

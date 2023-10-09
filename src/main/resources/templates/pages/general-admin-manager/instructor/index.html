@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-               xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-               layout:decorate="layout/admin/template">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/admin/template">
 <head>
     <meta charset="UTF-8">
     <th:block layout:fragment="title">
@@ -9,67 +9,90 @@
     </th:block>
 </head>
 <body>
-    <div class="container" layout:fragment="content">
-        <h2 class="text-center">Instructor list page</h2>
+<div class="container" layout:fragment="content">
+    <h2 class="text-center">Instructor list page</h2>
 
-        <div class="row mb-3">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered caption-top">
-                    <caption>
-                        <div class="row hstack">
-                            <div class="col-md-8 text-start">
-                                <input type="text" class="form-control" placeholder="Search...">
-                            </div>
-                            <div class="col-md-4 text-end">
-                                <a href="#" th:href="@{/ins/add}" class="btn btn-success col-sm-6">New</a>
-                            </div>
+    <div class="row mb-3">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered caption-top">
+                <caption>
+                    <div class="row hstack">
+                        <div class="col-sm-2 text-center">
+                            <select class="form-select" aria-label="Page">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="150">150</option>
+                                <option value="200">200</option>
+                            </select>
                         </div>
-                    </caption>
-                    <thead class="table-success">
-                        <tr class="text-center">
-                            <th scope="col-1">No</th>
-                            <th scope="col-3">Name</th>
-                            <th scope="col-3">Email</th>
-                            <th scope="col-2">Channel</th>
-                            <th scope="col-2">Hobby</th>
-                            <th scope="col-1">#</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:if="${ins.size()>0}">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr th:if="${ins.size()>0}">
-                            <td colspan="6">
-                                <nav aria-label="Page navigation fixed-bottom">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a class="page-link">Previous</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">
-                                <h2 class="text-center">Data not found</h2>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        <div class="col-md-7 text-start">
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <a href="#" th:href="@{/ins/add}" class="btn btn-success col-sm-6">New</a>
+                        </div>
+                    </div>
+                </caption>
+                <thead class="table-success">
+                <tr class="text-center">
+                    <th scope="col" class="col-sm-1">No</th>
+                    <th scope="col" class="col-sm-2">Name</th>
+                    <th scope="col" class="col-sm-2">Email</th>
+                    <th scope="col" class="col-sm-3">Channel</th>
+                    <th scope="col" class="col-sm-2">Hobby</th>
+                    <th scope="col" class="col-sm-2">#</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${ins.size()>0}" th:each="item, idx : ${ins}">
+                    <th scope="row" class="text-center">
+                        <san th:text="${idx.index+1}"></san>
+                    </th>
+                    <td><span th:text="*{item.firstName} + ' ' + *{item.lastName}"></span></td>
+                    <td><span th:text="*{item.email}"></span></td>
+                    <td><input type="hidden" th:value="*{item.instructorDetail.id}"/>
+                        <span th:utext="*{item.instructorDetail.youtubeChannel}"></span>
+                    </td>
+                    <td><span th:text="*{item.instructorDetail.hobby}"></span></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/ins/edit/{id}(id=${item.id})}">Edit</a>
+                        <form action="#" th:action="@{/ins/del/{id}(id=${item.id})}" method="post">
+                            <button class="btn btn-danger" type="submit"
+                                    onclick="if(!(confirm('Are you  sure you want to delete this instructor?'))) return false">
+                                Delete
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+                <tr th:if="${ins.size()>0}">
+                    <td colspan="6">
+                        <nav aria-label="Page navigation fixed-bottom">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link">Previous</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </td>
+                </tr>
+                <tr th:if="${ins.size()<=0}">
+                    <td colspan="6">
+                        <h2 class="text-center">Data not found</h2>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </body>
 </html>

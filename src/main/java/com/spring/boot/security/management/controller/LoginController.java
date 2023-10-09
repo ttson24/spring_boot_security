@@ -12,7 +12,6 @@ public class LoginController {
    @GetMapping("/login")
    public String login(Model model) {
        model.addAttribute("loginDto", new LoginDto());
-       System.out.println("Login form");
        return MyConstantScreen.LOGIN;
    }
 

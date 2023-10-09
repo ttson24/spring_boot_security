@@ -10,6 +10,5 @@ public class InstructorDetailDto {
     private Long id;
     private String youtubeChannel;
     private String hobby;
-    private InstructorDto instructorDto;
     public InstructorDetailDto(){}
 }
