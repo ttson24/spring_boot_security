@@ -2,6 +2,7 @@ package com.spring.boot.security.management.controller;
 
 import com.spring.boot.security.management.common.MyConstantScreen;
 import com.spring.boot.security.management.dto.instructor.InstructorDto;
+import com.spring.boot.security.management.entity.Instructor;
 import com.spring.boot.security.management.service.instructor.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,6 +65,8 @@ public class InstructorController {
     @GetMapping("/ins/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
         InstructorDto dto = insSv.findInstructorById(id);
+        List<Instructor> _result = insSv.findInstructorByJoinFetch(id);
+        System.out.println(_result);
         model.addAttribute("insDto", dto);
         model.addAttribute("action", false);
         return MyConstantScreen.INS_ADD;

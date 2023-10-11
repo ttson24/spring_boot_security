@@ -1,8 +1,7 @@
 package com.spring.boot.security.management.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "course")
@@ -17,8 +16,7 @@ public class Course {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 

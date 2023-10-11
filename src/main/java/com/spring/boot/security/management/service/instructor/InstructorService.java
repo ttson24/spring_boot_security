@@ -1,6 +1,7 @@
 package com.spring.boot.security.management.service.instructor;
 
 import com.spring.boot.security.management.dto.instructor.InstructorDto;
+import com.spring.boot.security.management.entity.Instructor;
 
 import java.util.List;
 
@@ -24,4 +25,5 @@ public interface InstructorService {
 
     boolean deleteById(Long id);
 
+    List<Instructor> findInstructorByJoinFetch(Long id);
 }

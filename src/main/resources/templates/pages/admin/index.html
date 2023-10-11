@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-                layout:decorate="layout/admin/template">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/admin/template">
 <head>
     <th:block layout:fragment="title">
-            <title>Index of admin page</title>
+        <title>Index of admin page</title>
     </th:block>
     <th:block layout:fragment="links">
         <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
     </th:block>
 </head>
 <body>
-    <div class="container" layout:fragment="content">
-        <h2>This is admin page</h2>
-        <a th:href="@{/}">Back Home</a>
-        <a th:href="@{/ins}">Instructor</a>
-    </div>
-    <th:block layout:fragment="scripts">
-        <script th:src="@{/js/index.js}"></script>
-    </th:block>
+<div class="container" layout:fragment="content">
+    <h2>This is admin page</h2>
+    <a th:href="@{/}">Back Home</a>
+</div>
+<th:block layout:fragment="scripts">
+    <script th:src="@{/js/index.js}"></script>
+</th:block>
 </body>
 </html>

@@ -195,4 +195,11 @@ public class InstructorServiceImpl implements InstructorService {
         }
         return _result;
     }
+
+    @Override
+    public List<Instructor> findInstructorByJoinFetch(Long id) {
+        List<Instructor> lstIns = new ArrayList<>();
+        lstIns = insRepo.findInstructorByJoinFetch(id);
+        return lstIns;
+    }
 }

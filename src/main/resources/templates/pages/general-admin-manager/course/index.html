@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/admin/template">
+<head>
+    <meta charset="UTF-8">
+    <th:block layout:fragment="Title">
+        <title>This is course list page</title>
+    </th:block>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <h2 class="text-center">Course List</h2>
+
+    <div class="row mt-3 mb-3">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered caption-top">
+                <caption>
+                    <div class="row hstack">
+                        <div class="col-sm-2">
+                            <select class="form-select" aria-label="Page">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="150">150</option>
+                                <option value="200">200</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                        <div class="col-sm-3 text-end">
+                            <a href="#" th:href="@{/course/add}" class="btn btn-primary col-sm-10">New</a>
+                        </div>
+                    </div>
+                </caption>
+                <thead>
+                <tr class="text-center">
+                    <th scope="col">No</th>
+                    <th scope="col">Instructor</th>
+                    <th scope="col">Course Title</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each=" item, idx : ${courses}">
+                    <th scope="row" class="text-center col-sm-1">
+                        <span th:text="${idx.index+1}"></span>
+                    </th>
+                    <td class="col-sm-3">
+                        <span th:text="*{item}"></span>
+                    </td>
+                    <td class="col=sm-6">
+                        <span th:text="*{item.title}"></span>
+                    </td>
+                    <td class="col-sm-2">
+                        <a href="#" class="btn btn-warning col-sm-5">Edit</a>
+                        <form action="#" th:action="@{/course/del/{id}(id=${item.id})}" method="post"
+                              class="col-sm-5">
+                            <button type="submit" class="btn btn-danger">Del</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${courses.size()>0}">
+                    <td colspan="6">
+                        <nav aria-label="Page navigation fixed-bottom">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link">Previous</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </td>
+                </tr>
+                <tr th:if="${courses.size()<=0}">
+                    <td colspan="6">
+                        <h2 class="text-center">Data not found</h2>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

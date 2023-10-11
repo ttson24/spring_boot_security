@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/admin/template">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block layout:fragment="title">
+        <title th:if="${isNew}">This is new course</title>
+        <title th:if="!${isNew}">This is edit course</title>
+    </th:block>
 </head>
 <body>
-
+<div class="container" layout:fragment="content">
+    <h2 class="text-center" th:if="${isNew}">This is new course</h2>
+    <h2 class="text-center" th:if="!${isNew}">This is edit course</h2>
+    <form action="#" th:action="@{/course/add}" method="post">
+        <div class="row mb-3 mt-4">
+            <div class="col-sm-6">
+                <select class="form-select" aria-label="default">
+                    <option selected>Choose instructor</option>
+                    <option th:each="is:${ins}" th:value="*{is.id}">
+                        <span th:text="*{is.firstName} +' '+ *{is.lastName}"></span>
+                    </option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" placeholder="Input course title">
+            </div>
+        </div>
+        <div class="row mt-3 mb-3 justify-content-center text-center">
+            <button class="btn btn-secondary col-sm-3 me-3">Cancel</button>
+            <button class="btn btn-primary col-sm-3">Create</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
