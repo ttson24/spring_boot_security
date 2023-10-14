@@ -45,6 +45,9 @@ public class InstructorController {
     ) {
         List<InstructorDto> _lstResult = insSv.findAll();
         model.addAttribute("ins", _lstResult);
+        List<Instructor> _result = insSv.findInstructorByJoinFetch(10L);
+        System.out.println("Controller findInstructorByJoinFetch");
+        System.out.println(_result);
         return MyConstantScreen.INS_INDEX;
     }
 
@@ -56,7 +59,7 @@ public class InstructorController {
 
     @PostMapping("/ins/add")
     public String add(Model model, @ModelAttribute InstructorDto dto) {
-        boolean _result = insSv.save(dto);
+        boolean _result = insSv.save(dto, null);
         model.addAttribute("msg", "");
         model.addAttribute("action", true);
         return MyConstantScreen.REDIRECT + "ins";
@@ -74,8 +77,7 @@ public class InstructorController {
 
     @PostMapping("/ins/edit/{id}")
     public String edit(Model model, @ModelAttribute InstructorDto dto, @PathVariable("id") Long id) {
-        dto.setId(id);
-        boolean _result = insSv.save(dto);
+        boolean _result = insSv.save(dto, id);
         model.addAttribute("msg", "");
         return MyConstantScreen.REDIRECT + "ins";
     }

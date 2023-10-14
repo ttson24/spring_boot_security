@@ -74,11 +74,11 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     @Transactional
-    public boolean save(InstructorDto dto) {
+    public boolean save(InstructorDto dto, Long id) {
         boolean _result = true;
         try {
             InstructorDetail insDetail = new InstructorDetail();
-            if (null == dto.getId()) {
+            if (null == id) {
                 Instructor ins = new Instructor();
                 BeanUtils.copyProperties(dto, ins);
                 insDetail.setYoutubeChannel(dto.getInstructorDetail().getYoutubeChannel());
@@ -86,7 +86,7 @@ public class InstructorServiceImpl implements InstructorService {
                 ins.setInstructorDetail(insDetail);
                 insRepo.save(ins);
             } else {
-                Optional<Instructor> upIns = insRepo.findById(dto.getId());
+                Optional<Instructor> upIns = insRepo.findById(id);
                 if (upIns.isPresent()) {
                     insDetail.setId(upIns.get().getInstructorDetail().getId());
                     insDetail.setYoutubeChannel(upIns.get().getInstructorDetail().getYoutubeChannel());
@@ -198,8 +198,6 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     public List<Instructor> findInstructorByJoinFetch(Long id) {
-        List<Instructor> lstIns = new ArrayList<>();
-        lstIns = insRepo.findInstructorByJoinFetch(id);
-        return lstIns;
+        return insRepo.findInstructorByJoinFetch(id);
     }
 }

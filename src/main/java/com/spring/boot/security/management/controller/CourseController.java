@@ -52,7 +52,10 @@ public class CourseController {
     @GetMapping("/course/edit/{id}")
     public String edit(Model model, @PathVariable Long id) {
         CourseDto dto = courseSv.findById(id);
+        model.addAttribute("isNew", false);
         model.addAttribute("course", dto);
+        List<InstructorDto> lstIns = insSv.findAll();
+        model.addAttribute("ins", lstIns);
         return MyConstantScreen.COURSE_ADD;
     }
 

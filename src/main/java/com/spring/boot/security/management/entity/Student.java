@@ -6,9 +6,9 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
-@Table(name = "instructor")
+@Table(name = "student")
 @Data
-public class Instructor {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,36 +21,38 @@ public class Instructor {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "mobile")
+    private String mobile;
+
     @Column(name = "email")
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "instructor_detail_id")
-    private InstructorDetail instructorDetail;
-
-    @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     private List<Course> courses;
 
-    public Instructor() {
+    public Student() {
     }
 
-    public Instructor(Long id, String firstName, String lastName, String email, InstructorDetail detail) {
-        this.id = id;
+    public Student(String firstName, String lastName, String mobile, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.mobile = mobile;
         this.email = email;
-        this.instructorDetail = detail;
     }
 
     @Override
     public String toString() {
-        return "Instructor{" +
+        return "Student{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", mobile='" + mobile + '\'' +
                 ", email='" + email + '\'' +
-                ", instructorDetail=" + instructorDetail +
                 '}';
     }
 }

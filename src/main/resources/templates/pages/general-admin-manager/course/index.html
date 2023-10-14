@@ -55,7 +55,8 @@
                         <span th:text="*{item.title}"></span>
                     </td>
                     <td class="col-sm-2">
-                        <a href="#" class="btn btn-warning col-sm-5">Edit</a>
+                        <a href="#" th:href="@{/course/edit/{id}(id=${item.id})}"
+                           class="btn btn-warning col-sm-5">Edit</a>
                         <form action="#" th:action="@{/course/del/{id}(id=${item.id})}" method="post"
                               class="col-sm-5">
                             <button type="submit" class="btn btn-danger">Del</button>

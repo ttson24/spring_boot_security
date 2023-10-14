@@ -3,6 +3,7 @@ package com.spring.boot.security.management.dao;
 import com.spring.boot.security.management.entity.Instructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -37,6 +38,6 @@ public interface InstructorRepository extends JpaRepository<Instructor, Long> {
     @Query(value = "SELECT ins FROM Instructor ins " +
             " JOIN FETCH ins.courses " +
             " JOIN FETCH ins.instructorDetail" +
-            " WHERE ins.id=?", nativeQuery = true)
-    List<Instructor> findInstructorByJoinFetch(Long id);
+            " WHERE ins.id = :id")
+    List<Instructor> findInstructorByJoinFetch(@Param("id") Long id);
 }

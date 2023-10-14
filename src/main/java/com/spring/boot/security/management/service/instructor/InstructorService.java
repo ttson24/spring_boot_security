@@ -11,7 +11,7 @@ public interface InstructorService {
 
     List<InstructorDto> findAll();
 
-    boolean save(InstructorDto instructor);
+    boolean save(InstructorDto instructor, Long id);
 
     InstructorDto findInstructorById(Long id);
 
